@@ -1,17 +1,15 @@
 <script setup>
 import { onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { getJSON, postJSON } from '../api'
+import { getJSON } from '../api'
+import OpeningEditor from '../components/OpeningEditor.vue'
 const route = useRoute()
-const detail = ref(null)
-const est = ref(null)
-const load = async () => {
-  detail.value = await getJSON(`/api/rooms/${route.params.id}`)
-  est.value = await postJSON('/api/estimate', { room_id: +route.params.id, persist: false })
-}
+const room = ref(null)
+const load = async () => { room.value = (await getJSON(`/api/rooms/${route.params.id}`)).room }
 onMounted(load); watch(() => route.params.id, load)
 </script>
-<template><div class="page" v-if="detail"><h1>{{ detail.room.name }}</h1>
-<p>净面积 {{ est?.net_m2 }} m² · 需漆 <span class="hero-num">{{ est?.liters }} L</span></p>
-<ul><li v-for="o in detail.openings" :key="o.id">{{ o.kind }} {{ o.w }}×{{ o.h }}</li></ul>
+<template><div class="page" v-if="room">
+  <h1>{{ room.name }}</h1>
+  <p>墙面 {{ room.length }}×{{ room.width }}×{{ room.height }} m</p>
+  <OpeningEditor :room-id="route.params.id" />
 </div></template>
