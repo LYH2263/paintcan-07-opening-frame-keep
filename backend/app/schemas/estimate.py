@@ -4,3 +4,6 @@ class EstimateRequest(BaseModel):
     coats: int | None = None
     coverage: float | None = None
     persist: bool = True
+
+class OpeningTrimRequest(BaseModel):
+    trim: float

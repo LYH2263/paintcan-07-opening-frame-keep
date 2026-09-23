@@ -10,3 +10,6 @@ table { width:100%; border-collapse:collapse; }
 th,td { border:1px solid #aacce0; padding:0.35rem; }
 .hero-num { font-size:2rem; color: var(--line); font-weight:700; }
 a { color: var(--line); }
+.error { color:#b00020; font-weight:600; }
+.tag { display:inline-block; margin:0.15rem 0.3rem 0.15rem 0; padding:0.1rem 0.4rem; border:1px solid #aacce0; border-radius:4px; font-size:0.85rem; }
+input[type=number] { width:5.5rem; }
